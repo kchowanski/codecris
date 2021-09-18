@@ -37,6 +37,11 @@ namespace CodeCris.Blog
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+            
+            services.AddWebOptimizer(pipeline =>
+            {
+                pipeline.AddScssBundle("/all.css", "scss/index.scss");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +60,8 @@ namespace CodeCris.Blog
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseWebOptimizer();
             app.UseStaticFiles();
 
             app.UseRouting();
